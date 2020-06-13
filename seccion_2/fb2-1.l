@@ -10,6 +10,7 @@ int lines = 0;
 \n { chars++; lines++; }
 . { chars++; }
 %%
+
 main(argc, argv)
 int argc;
 char **argv;
