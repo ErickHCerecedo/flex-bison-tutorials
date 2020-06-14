@@ -1,4 +1,6 @@
-/* Reconocimiento de tokens para el compilador */
+/* RECONOCEDOR LEXICO DEL COMPILADOR */
+/* @AUTHOR ERICK DE JESUS HERNANDEZ CERECEDO - A01066428
+/* @AUTHOR EVERARDO BECERRIL 
 %option noyywrap nodefault yylineno
 %{
 # include "compiler.h"
@@ -38,7 +40,7 @@ EXP ([Ee][-+]?[0-9]+)
 "fun"                           { return FUN_T;     }
 "set"							{ return SET_T;     }
 "read"							{ return READ_T;    }
-"print"							{ return PRINT_T;   }
+"print"							{ return PRINT_T;   } /*BUILT-IN FUNCION*/
 "return"                        { return RETURN_t;  }
 "if"							{ return IF_T;      }
 "ifelse"						{ return IFELSE_T;  }
@@ -54,13 +56,11 @@ EXP ([Ee][-+]?[0-9]+)
 [0-9]+"."[0-9]*{EXP}? |
 "."?[0-9]+{EXP}?                { yylval.d = atof(yytext);   return NUMBERF; }
 
-
- /**** PALABRAS RESERVADAS ****/
+ /**** EXTRAS ****/
 "//".*
-[ \t]   /* ignore whitespace */
-\\\n                            { printf("c> "); } /* ignore line continuation */
+[ \t]                                               /* IGNORA ESPACION EN BLANCO */
+\\\n                            { printf("c> "); }  /* IGNORA LINEA CONTINUA */
 
-.                               { yyerror("Mystery character %c\n", *yytext); }
-
+.                               { yyerror("Mystery character %c\n", *yytext); } /* IGNORA PALABRAS NO RECONOCIDAS */
 
 %%
