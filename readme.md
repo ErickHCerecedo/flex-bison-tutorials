@@ -11,4 +11,4 @@ gcc -o NAME_OUTPUT FILE_NAME.c lex.yy.c -L"A PATH IF YOU NEED TO SPECIFY" -lfl o
 
 ```
 
-## UPDATED UNTIL SECCION 2 🚀 - working...🛠️🛠️🛠️🛠️
+## UPDATED UNTIL SECCION 2 🚀 - working on section 3 🛠️🛠️🛠️🛠️
