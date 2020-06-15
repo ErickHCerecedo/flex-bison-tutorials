@@ -1,6 +1,6 @@
-/* RECONOCEDOR LEXICO DEL COMPILADOR */
-/* @AUTHOR ERICK DE JESUS HERNANDEZ CERECEDO - A01066428
-/* @AUTHOR EVERARDO BECERRIL 
+/* RECONOCEDOR LEXICO DEL COMPILADOR                            */
+/* @AUTHOR ERICK DE JESUS HERNANDEZ CERECEDO - A01066428        */
+/* @AUTHOR EVERARDO BECERRIL                                    */
 %option noyywrap nodefault yylineno
 %{
 # include "compiler.h"
@@ -22,6 +22,7 @@ EXP ([Ee][-+]?[0-9]+)
 "}"								|
 "("								|
 ")"								|
+","                             |
 ";"                             |	
 ":"                             { return yytext[0]; }
 
@@ -40,8 +41,8 @@ EXP ([Ee][-+]?[0-9]+)
 "fun"                           { return FUN_T;     }
 "set"							{ return SET_T;     }
 "read"							{ return READ_T;    }
-"print"							{ return PRINT_T;   } /*BUILT-IN FUNCION*/
-"return"                        { return RETURN_t;  }
+"print"							{ yylval.fn = B_print; return FUNC;   } /*BUILT-IN FUNCION*/
+"return"                        { return RETURN_T;  }
 "if"							{ return IF_T;      }
 "ifelse"						{ return IFELSE_T;  }
 "while"							{ return WHILE_T;   }
@@ -52,7 +53,7 @@ EXP ([Ee][-+]?[0-9]+)
 
  /**** NOMBRES ****/
 [a-zA-Z][a-zA-Z0-9]*            { yylval.s = lookup(yytext); return NAME; }
-[0-9]+                          { yylval.d = atof(yytext);   return NUMBERI; }
+[0-9]+                          { yylval.i = atof(yytext);   return NUMBERI; }
 [0-9]+"."[0-9]*{EXP}? |
 "."?[0-9]+{EXP}?                { yylval.d = atof(yytext);   return NUMBERF; }
 
