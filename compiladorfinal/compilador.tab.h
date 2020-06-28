@@ -39,28 +39,38 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBERF = 258,
-     NUMBERI = 259,
-     NAME = 260,
-     FUNC = 261,
-     PROGRAM_T = 262,
-     VAR_T = 263,
-     INT_T = 264,
-     FLOAT_T = 265,
-     FUN_T = 266,
-     SET_T = 267,
-     READ_T = 268,
-     PRINT_T = 269,
-     RETURN_T = 270,
-     IF_T = 271,
-     IFELSE_T = 272,
-     WHILE_T = 273,
-     FOR_T = 274,
-     STEP_T = 275,
-     TO_T = 276,
-     DO_T = 277,
-     CMP = 278,
-     UMINUS = 279
+     PROGRAM = 258,
+     READ = 259,
+     PRINT = 260,
+     IF = 261,
+     IFELSE = 262,
+     WHILE = 263,
+     FOR = 264,
+     TO = 265,
+     DO = 266,
+     PASOS = 267,
+     SET = 268,
+     VARCHAR = 269,
+     INT_P = 270,
+     FLOAT_P = 271,
+     SUMA = 272,
+     RESTA = 273,
+     MULTIPLICACION = 274,
+     DIVISION = 275,
+     IGUAL = 276,
+     MENOR = 277,
+     MAYOR = 278,
+     MENORIGUAL = 279,
+     MAYORIGUAL = 280,
+     ALLAVE = 281,
+     CLLAVE = 282,
+     APARENTESIS = 283,
+     CPARENTESIS = 284,
+     PUNTOYCOMA = 285,
+     DOSPUNTOS = 286,
+     INTEGER = 287,
+     FLOAT = 288,
+     ID = 289
    };
 #endif
 
@@ -71,19 +81,18 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 10 "compiler.y"
+#line 27 "compilador.y"
 
-    struct ast *a;
-    float d;
-    int i;
-    struct symbol *s;       /* Apuntador a simbolo */
-    struct symlist *sl;
-    int fn;                 /* Apuntador a function */
+    int var_type;
+    bool boolean;
+    char *identifier;
+    struct variableValue* value;
+    struct treeNode* node;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 87 "compiler.tab.h"
+#line 96 "compilador.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

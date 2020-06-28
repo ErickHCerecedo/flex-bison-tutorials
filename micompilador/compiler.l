@@ -1,10 +1,9 @@
 /* RECONOCEDOR LEXICO DEL COMPILADOR                            */
 /* @AUTHOR ERICK DE JESUS HERNANDEZ CERECEDO - A01066428        */
-/* @AUTHOR EVERARDO BECERRIL                                    */
+/* @AUTHOR EVERARDO BECERRIL - A01552015                        */
 %option noyywrap nodefault yylineno
 %{
-# include "compiler.h"
-# include "compiler.c"
+# include "compiler.tab.h"
 %}
 
 /* float exponent */

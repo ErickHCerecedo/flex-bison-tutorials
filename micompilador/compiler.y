@@ -1,15 +1,15 @@
 /* RECONOCEDOR SINTACTICO DEL COMPILADOR                        */
 /* @AUTHOR ERICK DE JESUS HERNANDEZ CERECEDO - A01066428        */
-/* @AUTHOR EVERARDO BECERRIL                                    */
+/* @AUTHOR EVERARDO BECERRIL - A01552015                        */
 %{
 # include <stdio.h>
 # include <stdlib.h>
-# include "fb3-2.h"
+//# include "compiler.h"
 %}
 
 %union {
     struct ast *a;
-    double d;
+    float d;
     int i;
     struct symbol *s;       /* Apuntador a simbolo */
     struct symlist *sl;
@@ -21,8 +21,8 @@
 %token <i>  NUMBERI
 %token <s>  NAME             
 %token <fn> FUNC 
-%token PROGRAM_T VAR_T INT_T FLOAT_T FUN_T SET_T READ_T PRINT_T 
-%token RETURN_T IF_T IFELSE_T WHILE_T FOR_T STEP_T TO_T DO_T
+%token PROGRAM_T VAR_T INT_T    FLOAT_T FUN_T SET_T  READ_T PRINT_T 
+%token RETURN_T  IF_T  IFELSE_T WHILE_T FOR_T STEP_T TO_T   DO_T
 
 %nonassoc <fn> CMP
 %right  '='
@@ -37,7 +37,10 @@
 
 %%
 
-prog:           PROGRAM_T NAME '{' opt_decls opt_fun_decls '}' stmt
+prog:           PROGRAM_T NAME '{' opt_decls opt_fun_decls '}' stmt {   
+                                                                        printf("= %4.4g\n> ", eval($7));
+                                                                        treefree($2);
+                                                                    }
 ;
 
 opt_decls:      decls
@@ -48,7 +51,7 @@ decls:          dec ';' decls
 |               dec
 ;
 
-dec:            VAR_T NAME ':' tipo
+dec:            VAR_T NAME ':' tipo     { $$ = newasgn($2, $4); }
 ;
 
 tipo:           INT_T

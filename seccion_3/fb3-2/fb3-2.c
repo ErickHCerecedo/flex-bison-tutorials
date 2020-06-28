@@ -211,6 +211,7 @@ symlistfree(struct symlist *sl)
 
 static double callbuiltin(struct fncall *);
 static double calluser(struct ufncall *);
+
 double
 eval(struct ast *a)
 {
@@ -220,21 +221,21 @@ eval(struct ast *a)
         return 0.0;
     }
     switch(a->nodetype) {
-        /* constant */
+        /* Constante */
         case 'K': v = ((struct numval *)a)->number; break;
-        /* name reference */
+        /* Nombre de referencia */
         case 'N': v = ((struct symref *)a)->s->value; break;
-        /* assignment */
+        /* Asignacion */
         case '=': v = ((struct symasgn *)a)->s->value =
         eval(((struct symasgn *)a)->v); break;
-        /* expressions */
+        /* Expresiones */
         case '+': v = eval(a->l) + eval(a->r); break;
         case '-': v = eval(a->l) - eval(a->r); break;
         case '*': v = eval(a->l) * eval(a->r); break;
         case '/': v = eval(a->l) / eval(a->r); break;
         case '|': v = fabs(eval(a->l)); break;
         case 'M': v = -eval(a->l); break;
-        /* comparisons */
+        /* Comparaciones */
         case '1': v = (eval(a->l) > eval(a->r))? 1 : 0; break;
         case '2': v = (eval(a->l) < eval(a->r))? 1 : 0; break;
         case '3': v = (eval(a->l) != eval(a->r))? 1 : 0; break;

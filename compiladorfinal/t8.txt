@@ -1,0 +1,26 @@
+program tres
+{
+   var x : int;
+   var y : int;
+   var zz: int
+}
+{
+   read x;
+   read y;
+
+   if (y < x)
+   {
+     set z x;
+     set x y;
+     set y z;
+   }
+
+   set z 0;
+   while (x < y) do
+   {
+     set z z + y;
+     set x x + 1;
+   }
+
+   print z;
+}
